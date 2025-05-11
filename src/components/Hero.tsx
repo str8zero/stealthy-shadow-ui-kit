@@ -20,9 +20,11 @@ export function Hero() {
                 Explore Automation Platform
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10">
-              Schedule Demo
-            </Button>
+            <Link to="/flowtune">
+              <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10">
+                Try Flowtune AI
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
