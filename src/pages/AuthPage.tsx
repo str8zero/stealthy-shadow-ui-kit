@@ -16,6 +16,7 @@ enum AuthMode {
 export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<AuthMode>(AuthMode.SIGN_IN);
   const navigate = useNavigate();
@@ -31,11 +32,28 @@ export default function AuthPage() {
         toast.success("Signed in successfully");
         navigate("/floword");
       } else {
-        const { error } = await supabase.auth.signUp({ email, password });
+        // For sign up, validate the name field
+        if (!fullName.trim()) {
+          toast.error("Please enter your name");
+          setLoading(false);
+          return;
+        }
+
+        const { error } = await supabase.auth.signUp({ 
+          email, 
+          password,
+          options: {
+            data: {
+              full_name: fullName
+            }
+          }
+        });
+        
         if (error) throw error;
         toast.success("Account created! Please check your email for verification.");
       }
     } catch (error: any) {
+      console.error("Authentication error:", error);
       toast.error(error.message || "Authentication failed");
     } finally {
       setLoading(false);
@@ -58,6 +76,19 @@ export default function AuthPage() {
         </CardHeader>
         <form onSubmit={handleAuth}>
           <CardContent className="space-y-4">
+            {mode === AuthMode.SIGN_UP && (
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
+                />
+              </div>
+            )}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input

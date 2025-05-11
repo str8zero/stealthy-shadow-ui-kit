@@ -8,6 +8,12 @@ interface AuthContextProps {
   user: User | null;
   signOut: () => Promise<void>;
   loading: boolean;
+  userProfile: UserProfile | null;
+}
+
+interface UserProfile {
+  fullName?: string;
+  email: string;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -15,6 +21,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,6 +30,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          const { email, user_metadata } = session.user;
+          setUserProfile({
+            fullName: user_metadata?.full_name,
+            email: email || '',
+          });
+        } else {
+          setUserProfile(null);
+        }
+        
         setLoading(false);
       }
     );
@@ -31,6 +49,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        const { email, user_metadata } = session.user;
+        setUserProfile({
+          fullName: user_metadata?.full_name,
+          email: email || '',
+        });
+      }
+      
       setLoading(false);
     });
 
@@ -45,7 +72,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     session,
     user,
     signOut,
-    loading
+    loading,
+    userProfile
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

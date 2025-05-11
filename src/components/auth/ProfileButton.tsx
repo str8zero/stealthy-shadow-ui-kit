@@ -14,7 +14,7 @@ import {
 import { toast } from "@/components/ui/sonner";
 
 export function ProfileButton() {
-  const { user, signOut } = useAuth();
+  const { user, userProfile, signOut } = useAuth();
 
   const handleSignOut = async () => {
     await signOut();
@@ -31,12 +31,15 @@ export function ProfileButton() {
     );
   }
 
+  // Display name if available, otherwise fall back to email
+  const displayName = userProfile?.fullName || user.email?.split('@')[0] || 'User';
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="flex gap-2">
           <User className="h-4 w-4" />
-          {user.email?.split('@')[0]}
+          {displayName}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
