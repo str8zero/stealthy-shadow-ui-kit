@@ -134,7 +134,7 @@ export function FlowtuneWorkflowBuilder() {
         <div className="max-w-4xl mx-auto">
           <Card className="glass-effect border-primary/10 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Flowtune AI Workflow Builder</CardTitle>
+              <CardTitle className="text-2xl text-center">Floword AI Workflow Builder</CardTitle>
               <CardDescription className="text-center">
                 Describe what you want to automate in plain language
               </CardDescription>

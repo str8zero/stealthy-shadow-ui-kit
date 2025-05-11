@@ -12,7 +12,7 @@ export function FlowtuneHero({ onGetStarted }: FlowtuneHeroProps) {
       <div className="container relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl mb-6">
-            <span className="text-gradient">Flowtune AI</span>
+            <span className="text-gradient">Floword AI</span>
           </h1>
           <p className="text-3xl font-medium mb-8 text-foreground/90">
             From prompt to process—business automation in your own words.

@@ -30,7 +30,7 @@ export function FlowtuneFeatures() {
     },
     {
       title: "Self-Hosted Option",
-      description: "Deploy Flowtune AI on your own infrastructure for enhanced privacy and control.",
+      description: "Deploy Floword AI on your own infrastructure for enhanced privacy and control.",
       icon: "🔒"
     }
   ];
@@ -47,7 +47,7 @@ export function FlowtuneFeatures() {
               Build Workflows With Words
             </h2>
             <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Flowtune AI transforms how businesses automate workflows by making complex processes simple.
+              Floword AI transforms how businesses automate workflows by making complex processes simple.
             </p>
           </div>
         </div>

@@ -20,9 +20,9 @@ export function Hero() {
                 Explore Automation Platform
               </Button>
             </Link>
-            <Link to="/flowtune">
+            <Link to="/floword">
               <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10">
-                Try Flowtune AI
+                Try Floword AI
               </Button>
             </Link>
           </div>

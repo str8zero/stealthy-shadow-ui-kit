@@ -43,13 +43,13 @@ export function FlowtuneDifferentiators() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-10">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">
-              Why Flowtune AI
+              Why Floword AI
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               The Future of Business Automation
             </h2>
             <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              See how Flowtune AI stands out from traditional automation platforms
+              See how Floword AI stands out from traditional automation platforms
             </p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export function FlowtuneDifferentiators() {
                 <TableHeader>
                   <TableRow className="bg-primary/5">
                     <TableHead className="w-1/3">Feature</TableHead>
-                    <TableHead className="w-1/3">Flowtune AI</TableHead>
+                    <TableHead className="w-1/3">Floword AI</TableHead>
                     <TableHead className="w-1/3">Traditional Platforms</TableHead>
                   </TableRow>
                 </TableHeader>
