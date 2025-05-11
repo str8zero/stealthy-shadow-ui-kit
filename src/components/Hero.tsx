@@ -1,50 +1,36 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function Hero() {
   return (
-    <section className="pt-24 pb-12 md:pt-32 md:pb-20">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-          <div className="flex flex-col justify-center space-y-4">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none animate-fade-in">
-                <span className="text-gradient">AI-Powered</span> Future Awaits
-              </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl animate-fade-in" style={{ animationDelay: '0.1s' }}>
-                Integrate powerful AI capabilities into your workflow. Experience the next generation of intelligent solutions.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row animate-fade-in" style={{ animationDelay: '0.2s' }}>
+    <section className="relative py-24 overflow-hidden">
+      <div className="container relative z-10">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl mb-6">
+            <span className="text-gradient">Enterprise AI</span> Automation Platform
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Harness the power of AI to solve your business pain points, automate workflows, 
+            and integrate with your enterprise systems.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/automation">
               <Button size="lg" className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-500/90">
-                Get Started
-                <ChevronRight className="ml-2 h-4 w-4" />
+                Explore Automation Platform
               </Button>
-              <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/5">
-                View Demo
-              </Button>
-            </div>
-            <div className="flex items-center gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="inline-block h-8 w-8 rounded-full bg-gradient-to-r from-secondary to-secondary/50 ring-2 ring-background"></div>
-                ))}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                <span className="font-medium text-foreground">4,000+</span> satisfied users
-              </div>
-            </div>
-          </div>
-          <div className="mx-auto lg:mx-0 relative animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/30 to-purple-500/30 blur-xl"></div>
-            <div className="glass-effect rounded-xl p-1 animate-glow">
-              <div className="h-[350px] w-full rounded-lg bg-secondary/40 lg:h-[400px] xl:h-[500px]"></div>
-            </div>
-            <div className="absolute -bottom-10 -left-10 h-[150px] w-[150px] rounded-full bg-primary/20 blur-3xl"></div>
+            </Link>
+            <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10">
+              Schedule Demo
+            </Button>
           </div>
         </div>
       </div>
+
+      {/* Background effects */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/20 blur-[120px] -z-10" />
+      <div className="absolute top-0 right-0 w-72 h-72 bg-purple-600/30 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 -z-10" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-600/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 -z-10" />
     </section>
   );
 }

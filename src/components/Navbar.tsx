@@ -26,6 +26,9 @@ export function Navbar() {
           <a href="#pricing" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
             Pricing
           </a>
+          <a href="/automation" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+            Automation Platform
+          </a>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="gap-1">
