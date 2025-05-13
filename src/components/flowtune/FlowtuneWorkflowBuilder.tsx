@@ -4,13 +4,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, ArrowRight, MessageSquare, Play, Save } from "lucide-react";
+import { Loader2, ArrowRight, MessageSquare, Play, Save, XCircle } from "lucide-react";
 import { FlowtuneWorkflowVisualizer } from "./FlowtuneWorkflowVisualizer";
+import { FlowtuneWorkflowExecution } from "./FlowtuneWorkflowExecution";
+import { toast } from "@/components/ui/sonner";
 
 export function FlowtuneWorkflowBuilder() {
   const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [workflow, setWorkflow] = useState<any>(null);
+  const [isExecuting, setIsExecuting] = useState(false);
+  const [executionCount, setExecutionCount] = useState(0);
   
   const samplePrompts = [
     "Remind clients who didn't pay invoices in 7 days",
@@ -128,6 +132,25 @@ export function FlowtuneWorkflowBuilder() {
     setPrompt(prompt);
   };
   
+  const handleRunWorkflow = () => {
+    setIsExecuting(true);
+    setExecutionCount(prev => prev + 1);
+    toast.info("Workflow execution started");
+  };
+
+  const handleSaveWorkflow = () => {
+    toast.success("Workflow saved successfully");
+  };
+
+  const handleCancelExecution = () => {
+    setIsExecuting(false);
+    toast.info("Workflow execution cancelled");
+  };
+
+  const handleExecutionComplete = () => {
+    setIsExecuting(false);
+  };
+  
   return (
     <section className="py-12 relative overflow-hidden">
       <div className="container px-4 md:px-6">
@@ -146,6 +169,7 @@ export function FlowtuneWorkflowBuilder() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   className="min-h-[100px] bg-background/50 border-border"
+                  disabled={isExecuting}
                 />
                 
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -165,7 +189,7 @@ export function FlowtuneWorkflowBuilder() {
               <div className="flex justify-center">
                 <Button
                   onClick={handleSubmit}
-                  disabled={!prompt.trim() || isProcessing}
+                  disabled={!prompt.trim() || isProcessing || isExecuting}
                   className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-500/90 w-full sm:w-auto"
                 >
                   {isProcessing ? (
@@ -185,19 +209,39 @@ export function FlowtuneWorkflowBuilder() {
                   <div className="flex justify-between items-center">
                     <h3 className="text-xl font-semibold">{workflow.name}</h3>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        <MessageSquare className="h-4 w-4 mr-1" /> Edit
-                      </Button>
-                      <Button size="sm" className="bg-primary hover:bg-primary/90">
-                        <Play className="h-4 w-4 mr-1" /> Run
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Save className="h-4 w-4 mr-1" /> Save
-                      </Button>
+                      {isExecuting ? (
+                        <Button variant="destructive" size="sm" onClick={handleCancelExecution}>
+                          <XCircle className="h-4 w-4 mr-1" /> Cancel
+                        </Button>
+                      ) : (
+                        <>
+                          <Button variant="outline" size="sm">
+                            <MessageSquare className="h-4 w-4 mr-1" /> Edit
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            className="bg-primary hover:bg-primary/90"
+                            onClick={handleRunWorkflow}
+                          >
+                            <Play className="h-4 w-4 mr-1" /> Run
+                          </Button>
+                          <Button variant="outline" size="sm" onClick={handleSaveWorkflow}>
+                            <Save className="h-4 w-4 mr-1" /> Save
+                          </Button>
+                        </>
+                      )}
                     </div>
                   </div>
                   
-                  <FlowtuneWorkflowVisualizer workflow={workflow} />
+                  {isExecuting ? (
+                    <FlowtuneWorkflowExecution 
+                      key={`execution-${executionCount}`}
+                      workflow={workflow} 
+                      onComplete={handleExecutionComplete} 
+                    />
+                  ) : (
+                    <FlowtuneWorkflowVisualizer workflow={workflow} />
+                  )}
                 </div>
               )}
             </CardContent>
