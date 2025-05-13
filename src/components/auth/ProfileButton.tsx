@@ -50,6 +50,11 @@ export function ProfileButton() {
             My Workflows
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/profile" className="w-full cursor-pointer">
+            Profile Settings
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
           Sign out
         </DropdownMenuItem>
