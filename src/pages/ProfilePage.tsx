@@ -2,8 +2,10 @@
 import { useAuth } from "@/components/auth/AuthProvider";
 import { Navigate } from "react-router-dom";
 import { UserSettings } from "@/components/user/UserSettings";
+import { JWTDisplay } from "@/components/user/JWTDisplay";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function ProfilePage() {
   const { user, loading } = useAuth();
@@ -28,7 +30,21 @@ export default function ProfilePage() {
       <main className="flex-grow container px-4 py-12">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold mb-6">Account Settings</h1>
-          <UserSettings />
+          
+          <Tabs defaultValue="profile" className="w-full">
+            <TabsList className="grid grid-cols-2 mb-6">
+              <TabsTrigger value="profile">Profile Information</TabsTrigger>
+              <TabsTrigger value="security">Security & JWT</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="profile">
+              <UserSettings />
+            </TabsContent>
+            
+            <TabsContent value="security">
+              <JWTDisplay />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
       <Footer />

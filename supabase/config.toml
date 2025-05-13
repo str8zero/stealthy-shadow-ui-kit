@@ -1,1 +1,5 @@
+
 project_id = "joudbvrmpwztuwdygrhw"
+
+[auth.hooks]
+custom_access_token_claims = "http://localhost:54321/functions/v1/handle-auth-jwt"
